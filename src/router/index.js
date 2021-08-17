@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login2 from '../views/Login2.vue'
 import Authenticated from "@/views/Authenticated";
+import Pessoa from "@/views/Pessoa";
 
 Vue.use(VueRouter)
 
@@ -16,10 +17,16 @@ const routes = [
     path: '/login2',
     name: 'Login',
     component: Login2
-  },{
+  },
+  {
     path: '/authenticated',
     name: 'Authenticated',
     component: Authenticated
+  },
+  {
+    path: '/pessoa',
+    name: 'Pessoa',
+    component: Pessoa
   },
   {
     path: '/about',
