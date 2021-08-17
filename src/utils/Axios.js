@@ -1,4 +1,4 @@
 import axios from 'axios';
 
 axios.defaults.baseURL = 'http://localhost:8080/api';
-axios.defaults.headers.common['Authorization'] = 'Basic' + localStorage.getItem('token')
+axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
