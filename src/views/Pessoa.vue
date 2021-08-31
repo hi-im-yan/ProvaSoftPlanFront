@@ -1,12 +1,19 @@
 <template>
   <div>
+    <v-container>
+      <v-row>
+        <v-col cols="12">
+          <Table :tableHeaders="tableHeaders" :tableItems="tableItems" :tableTitle="tableTitle"></Table>
+        </v-col>
+      </v-row>
+    </v-container>
+
     <v-card elevation="4" max-width="1000px">
       <v-card-text>
-        <Table :tableHeaders="tableHeaders" :tableItems="tableItems" :tableTitle="tableTitle"></Table>
+        <Form :formFields="formFields" formTitle="Registrar Pessoa" @confirmar="registrarPessoa($event)"></Form>
       </v-card-text>
     </v-card>
 
-    <Form :formFields="formFields" formTitle="Registrar Pessoa" @confirmar="registrarPessoa($event)"></Form>
   </div>
 </template>
 
@@ -45,7 +52,7 @@
         {text:"Sexo", value: "sexo"},
       ],
       tableItems: [],
-      tableTitle: "Pessoa"
+      tableTitle: "Pessoas"
     }),
 
     created(){
