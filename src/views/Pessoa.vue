@@ -1,11 +1,19 @@
 <template>
-<!--  <Registrar></Registrar>-->
-  <Form :formFields="formFields" formTitle="Registrar Pessoa" @confirmar="registrarPessoa($event)"></Form>
+  <div>
+    <v-card elevation="4" max-width="1000px">
+      <v-card-text>
+        <Table :tableHeaders="tableHeaders" :tableItems="tableItems" :tableTitle="tableTitle"></Table>
+      </v-card-text>
+    </v-card>
+
+    <Form :formFields="formFields" formTitle="Registrar Pessoa" @confirmar="registrarPessoa($event)"></Form>
+  </div>
 </template>
 
 <script>
   // import Registrar from "@/components/Pessoa/Registrar";
   import Form from "@/components/Form";
+  import Table from "@/components/Table";
   import axios from 'axios'
   import CheckAuthentication from "@/utils/CheckAuthentication";
   export default {
@@ -13,7 +21,8 @@
 
     components:{
       // Registrar,
-      Form
+      Form,
+      Table
     },
 
     data: () => ({
@@ -26,7 +35,17 @@
         {"type": "text-field", "label": "Naturalidade", "col": 3, "rules": [v => !!v || 'Naturalidade é obrigatório'], "value": "", "required":false},
         {"type": "select", "label": "Gênero", "col": 3, "rules": [v => !!v || 'Gênero é obrigatório'], "items": ["Masculino", "Feminino"], "value": "", "required":false},
       ],
-      validado: false,
+      tableHeaders: [
+        {text:"Nome", value: "nome", align: 'start'},
+        {text:"Email", value: "email"},
+        {text:"CPF", value: "cpf"},
+        {text:"Naturalidade", value: "naturalidade"},
+        {text:"Nacionalidade", value: "nacionalidade"},
+        {text:"Data Nascimento", value: "data_nascimento"},
+        {text:"Sexo", value: "sexo"},
+      ],
+      tableItems: [],
+      tableTitle: "Pessoa"
     }),
 
     created(){
@@ -37,6 +56,11 @@
           this.$router.push("/login2")
         }
       })
+    },
+
+    async mounted() {
+      let response = await axios.get('/pessoa/buscarTodos')
+      this.tableItems = response.data
     },
 
     methods: {
