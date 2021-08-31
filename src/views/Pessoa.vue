@@ -7,6 +7,7 @@
   // import Registrar from "@/components/Pessoa/Registrar";
   import Form from "@/components/Form";
   import axios from 'axios'
+  import CheckAuthentication from "@/utils/CheckAuthentication";
   export default {
     name: "Pessoa",
 
@@ -25,8 +26,18 @@
         {"type": "text-field", "label": "Naturalidade", "col": 3, "rules": [v => !!v || 'Naturalidade é obrigatório'], "value": "", "required":false},
         {"type": "select", "label": "Gênero", "col": 3, "rules": [v => !!v || 'Gênero é obrigatório'], "items": ["Masculino", "Feminino"], "value": "", "required":false},
       ],
-
+      validado: false,
     }),
+
+    created(){
+      let auth = new CheckAuthentication();
+
+      auth.check().then(res => {
+        if(res === false){
+          this.$router.push("/login2")
+        }
+      })
+    },
 
     methods: {
       registrarPessoa(formValues){
