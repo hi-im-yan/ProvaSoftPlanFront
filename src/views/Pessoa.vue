@@ -3,7 +3,7 @@
     <v-container>
       <v-row>
         <v-col cols="12">
-          <Table :tableHeaders="tableHeaders" :tableItems="tableItems" :tableTitle="tableTitle"></Table>
+          <Table :tableHeaders="tableHeaders" :tableItems="tableItems" :tableTitle="tableTitle" :isCrud="true"></Table>
         </v-col>
       </v-row>
     </v-container>
